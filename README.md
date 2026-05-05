@@ -43,6 +43,29 @@ que você pode revisar, editar, versionar com git, ou compartilhar com qualquer 
 
 ---
 
+
+## 🧠 Kernel Palace — sua IA lembra de você
+
+> Outros assistentes te esquecem quando você fecha a aba.
+> O Kerneo lembra. **Entre sessões. Entre dias. Entre updates.**
+Você: "salva: meu CEP é 01310-100"
+Kerneo: ✓ Pronto.
+
+[3 dias depois, sessão nova]
+
+Você: "qual meu CEP?"
+Kerneo: Seu CEP é 01310-100.
+
+**3 camadas locais (SQLite no seu PC)**:
+- 🗂️ **Facts** — chave/valor sobre você (CEP, preferências, contexto)
+- 💬 **History** — últimos turnos da conversa
+- 🎯 **Sessions** — estado por sessão (último plano, retry, etc)
+### 🔒 Privacidade real
+Tudo em `data/kerneo.db`. **Nada vai pra nuvem**. Quer apagar? Delete o arquivo.
+Funciona até offline (com Ollama). Sua memória é sua.
+
+---
+
 ## 🚀 Como começar (5 minutos)
 
 ### Caminho fácil — Windows
