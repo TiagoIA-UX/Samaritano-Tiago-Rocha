@@ -1,0 +1,58 @@
+{
+  "name": "kerneo-lite",
+  "version": "0.3.0",
+  "description": "Personal AI orchestrator with self-evolving skills. Voice + chat assistant that creates its own tools on demand. Multi-provider (OpenAI/Anthropic/DeepSeek/Groq/Gemini/OpenRouter/Ollama).",
+  "type": "module",
+  "main": "src/server.js",
+  "bin": {
+    "kerneo-lite": "src/server.js"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node tests/smoke.js",
+    "build:exe": "pkg . --targets node20-win-x64 --output dist/Kerneo.exe",
+    "build:macos": "pkg . --targets node20-macos-x64 --output dist/Kerneo-mac",
+    "build:linux": "pkg . --targets node20-linux-x64 --output dist/Kerneo-linux",
+    "build:all": "pkg . --targets node20-win-x64,node20-macos-x64,node20-linux-x64 --output dist/Kerneo"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "orchestrator",
+    "voice-assistant",
+    "openai",
+    "anthropic",
+    "self-evolving",
+    "auto-skills",
+    "llm",
+    "automation"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.0.0",
+    "dotenv": "^17.0.0",
+    "openai": "^4.80.0",
+    "selfsigned": "^2.4.1",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  },
+  "pkg": {
+    "scripts": [
+      "src/**/*.js"
+    ],
+    "assets": [
+      "public/**/*",
+      "config.json.example",
+      ".env.example",
+      "node_modules/better-sqlite3/build/**/*",
+      "node_modules/selfsigned/**/*"
+    ],
+    "outputPath": "dist"
+  }
+}

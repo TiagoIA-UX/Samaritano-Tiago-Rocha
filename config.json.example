@@ -1,0 +1,119 @@
+{
+  "// docs": "Kerneo Lite — config completa. Copie pra config.json e edite. Se config.json não existir, fallback usa apenas .env (OPENAI_API_KEY).",
+  "// suporte": "Suporta OpenAI, Anthropic, DeepSeek, Groq, Gemini, OpenRouter, Ollama (local), e qualquer provider compatível com OpenAI API. Basta preencher apiKey + opcionalmente baseUrl.",
+
+  "provider": "auto",
+  "// provider": "auto = usa o primeiro com apiKey preenchida. OU especifique: openai | anthropic | deepseek | groq | gemini | openrouter | ollama",
+
+  "providers": {
+    "openai": {
+      "apiKey": "",
+      "baseUrl": "https://api.openai.com/v1",
+      "models": {
+        "fast": "gpt-4o-mini",
+        "smart": "gpt-4o",
+        "tts": "tts-1",
+        "stt": "gpt-4o-mini-transcribe",
+        "vision": "gpt-4o"
+      },
+      "// docs": "Padrão recomendado. Cobre LLM + TTS + STT + Vision com 1 key. https://platform.openai.com/api-keys"
+    },
+
+    "anthropic": {
+      "apiKey": "",
+      "baseUrl": "https://api.anthropic.com",
+      "models": {
+        "fast": "claude-haiku-4-5",
+        "smart": "claude-sonnet-4-5",
+        "vision": "claude-sonnet-4-5"
+      },
+      "// docs": "Claude da Anthropic. Não tem TTS/STT — usa OpenAI fallback se openai.apiKey também presente. https://console.anthropic.com/"
+    },
+
+    "deepseek": {
+      "apiKey": "",
+      "baseUrl": "https://api.deepseek.com/v1",
+      "models": {
+        "fast": "deepseek-chat",
+        "smart": "deepseek-chat"
+      },
+      "// docs": "DeepSeek — barato e bom em PT-BR. Compatível com formato OpenAI. https://platform.deepseek.com/"
+    },
+
+    "groq": {
+      "apiKey": "",
+      "baseUrl": "https://api.groq.com/openai/v1",
+      "models": {
+        "fast": "llama-3.3-70b-versatile",
+        "smart": "llama-3.3-70b-versatile"
+      },
+      "// docs": "Groq — inferência ULTRA RÁPIDA (~500 tokens/s). Llama 3.3 grátis. https://console.groq.com/"
+    },
+
+    "gemini": {
+      "apiKey": "",
+      "baseUrl": "https://generativelanguage.googleapis.com/v1beta/openai/",
+      "models": {
+        "fast": "gemini-2.0-flash",
+        "smart": "gemini-2.5-pro"
+      },
+      "// docs": "Google Gemini. Free tier generoso. https://aistudio.google.com/apikey"
+    },
+
+    "openrouter": {
+      "apiKey": "",
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "models": {
+        "fast": "openai/gpt-4o-mini",
+        "smart": "anthropic/claude-3.5-sonnet"
+      },
+      "// docs": "OpenRouter — 1 key, acesso a 200+ modelos (OpenAI, Anthropic, Llama, etc). https://openrouter.ai/keys"
+    },
+
+    "ollama": {
+      "apiKey": "ollama",
+      "baseUrl": "http://localhost:11434/v1",
+      "models": {
+        "fast": "llama3.2",
+        "smart": "llama3.1:70b"
+      },
+      "// docs": "Ollama local — 100% offline, gratuito. Instale em https://ollama.com e rode `ollama pull llama3.2`. apiKey é literal 'ollama' (não precisa de chave real)."
+    },
+
+    "custom": {
+      "apiKey": "",
+      "baseUrl": "",
+      "models": {
+        "fast": "",
+        "smart": ""
+      },
+      "// docs": "Use pra qualquer provider compatível com OpenAI API que não está listado. Preencha apiKey + baseUrl + nome do modelo."
+    }
+  },
+
+  "voice": {
+    "ttsEnabled": true,
+    "voice": "nova",
+    "speed": 1.0,
+    "// docs": "Vozes OpenAI: alloy, echo, fable, onyx, nova, shimmer, sage, coral, verse"
+  },
+
+  "server": {
+    "port": 5070,
+    "httpsPort": 5071,
+    "httpsEnabled": true,
+    "bindLan": false,
+    "// docs": "bindLan=true expõe na rede local (acesso via celular). Cuidado: sem auth!"
+  },
+
+  "logging": {
+    "level": "info",
+    "// docs": "error | warn | info | debug"
+  },
+
+  "skills": {
+    "allowAutoCreate": true,
+    "maxUserSkills": 50,
+    "// docs": "allowAutoCreate=false desativa o tool skill_create (impede Kerneo de gerar novas tools). maxUserSkills limita quantas user-tools podem existir."
+  }
+}
