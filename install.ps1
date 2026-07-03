@@ -1,5 +1,5 @@
 # ============================================================
-#  Kerneo Lite - Instalador profissional (PowerShell)
+#  Samaritano - Instalador profissional (PowerShell)
 #
 #  Roda em qualquer Windows 7+ via:
 #    powershell -NoProfile -ExecutionPolicy Bypass -File install.ps1
@@ -76,7 +76,7 @@ Write-Host ""
 Write-Host "  Esse script vai:" -ForegroundColor White
 Write-Host "    1) Verificar o ambiente do seu PC"
 Write-Host "    2) Instalar Node.js se necessario"
-Write-Host "    3) Baixar as dependencias do Kerneo"
+Write-Host "    3) Baixar as dependencias do Samaritano"
 Write-Host "    4) Pedir sua OpenAI API key"
 Write-Host "    5) Iniciar o servidor + abrir o navegador"
 Write-Host ""
@@ -95,7 +95,7 @@ Write-Step 1 5 "Verificando seu sistema..."
 # 1a. Path com caracteres especiais?
 if ($ScriptDir -match '[^\x00-\x7F]') {
     Write-Warn "Pasta com acentos detectada: $ScriptDir"
-    Write-Host "         Pode causar problemas. Considere mover pra C:\Kerneo" -ForegroundColor Yellow
+    Write-Host "         Pode causar problemas. Considere mover pra C:\Samaritano" -ForegroundColor Yellow
 } else {
     Write-Ok "Pasta sem caracteres especiais"
 }
@@ -104,7 +104,7 @@ if ($ScriptDir -match '[^\x00-\x7F]') {
 $drive = (Get-Item $ScriptDir).PSDrive
 if ($drive.DisplayRoot -or $drive.Description -like '*Removable*' -or $drive.Description -like '*USB*') {
     Write-Warn "Voce esta rodando do pendrive/USB."
-    Write-Host "         Recomendo COPIAR a pasta pra C:\Kerneo antes de continuar." -ForegroundColor Yellow
+    Write-Host "         Recomendo COPIAR a pasta pra C:\Samaritano antes de continuar." -ForegroundColor Yellow
     Write-Host "         Pendrives sao lentos e podem ter problemas de permissao." -ForegroundColor Yellow
     Write-Host ""
     $resp = Read-Host "Continuar mesmo assim? (S/N)"
@@ -261,7 +261,7 @@ try {
 # ============================================================
 #  ETAPA 3 / 5 - DEPENDENCIAS
 # ============================================================
-Write-Step 3 5 "Instalando dependencias do Kerneo..."
+Write-Step 3 5 "Instalando dependencias do Samaritano..."
 
 if (-not (Test-Path "package.json")) {
     Write-Fail "package.json nao encontrado. Voce esta na pasta certa?"
@@ -414,10 +414,10 @@ if (-not $envValid) {
         Write-Host "    2) Faca login (ou crie conta - leva 2 min)"
         if ($providerName -eq 'groq') {
             Write-Host "    3) Clique 'Create API Key'"
-            Write-Host "    4) De um nome (ex: 'Kerneo') e cria"
+            Write-Host "    4) De um nome (ex: 'Samaritano') e cria"
         } else {
             Write-Host "    3) Clique 'Create new secret key'"
-            Write-Host "    4) De um nome (ex: 'Kerneo') e clique 'Create'"
+            Write-Host "    4) De um nome (ex: 'Samaritano') e clique 'Create'"
         }
         Write-Host "    5) COPIE a key"
         Write-Host "    6) Volte aqui e cole abaixo"
@@ -535,7 +535,7 @@ if ($freePort -ne 5070) {
 $url = "http://localhost:$freePort"
 
 Write-Host ""
-Write-Title "TUDO PRONTO! Iniciando Kerneo Lite..."
+Write-Title "TUDO PRONTO! Iniciando Samaritano..."
 Write-Host ""
 Write-Host "  Acesse: " -NoNewline
 Write-Host $url -ForegroundColor Cyan

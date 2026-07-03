@@ -1,7 +1,6 @@
 @echo off
-REM Kerneo Lite - Diagnostico de problemas
-
-title Kerneo Lite - Troubleshoot
+REM Samaritano - Diagnostico de problemas
+title Samaritano - Troubleshoot
 
 cd /d "%~dp0"
 

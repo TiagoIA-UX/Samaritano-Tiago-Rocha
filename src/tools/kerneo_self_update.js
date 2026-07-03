@@ -26,12 +26,12 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..')
 
-const REPO = process.env.KERNEO_UPDATE_REPO || 'kerneo-org/kerneo-lite'
+const REPO = process.env.SAMARITANO_UPDATE_REPO || process.env.KERNEO_UPDATE_REPO || 'TiagoIA-UX/Kerneo'
 
 export const definition = {
   name: 'kerneo_self_update',
   description:
-    'Verifica e instala atualizações do Kerneo Lite via GitHub. Use quando user pedir "atualiza", "verifica nova versão", "auto-update". Preserva user-tools, config.json, .env e data.',
+    'Verifica e instala atualizações do Samaritano via GitHub. Use quando user pedir "atualiza", "verifica nova versão", "auto-update". Preserva user-tools, config.json, .env.local e data.',
   parameters: {
     type: 'object',
     properties: {
@@ -69,7 +69,7 @@ function compareVersions(a, b) {
 function fetchJson(url, headers = {}) {
   return new Promise((resolve, reject) => {
     https.get(url, {
-      headers: { 'User-Agent': 'Kerneo-Lite-Updater', Accept: 'application/json', ...headers },
+      headers: { 'User-Agent': 'Samaritano-Updater', Accept: 'application/json', ...headers },
     }, (res) => {
       if (res.statusCode === 301 || res.statusCode === 302) {
         return fetchJson(res.headers.location, headers).then(resolve, reject)
@@ -100,8 +100,8 @@ export async function execute({ check_only = false, force = false } = {}) {
         ok: false,
         error: `Repo "${REPO}" não tem releases publicadas (ou não existe).`,
         hint:
-          `Configure o repo correto via variável de ambiente KERNEO_UPDATE_REPO.\n` +
-          `Ex: KERNEO_UPDATE_REPO=usuario/kerneo-lite\n\n` +
+          `Configure o repo via SAMARITANO_UPDATE_REPO ou KERNEO_UPDATE_REPO.\n` +
+          `Ex: SAMARITANO_UPDATE_REPO=TiagoIA-UX/Kerneo\n\n` +
           `Você está na versão ${current}. Auto-update ficará disponível quando o repo for publicado.`,
         current,
       }
@@ -154,7 +154,7 @@ export async function execute({ check_only = false, force = false } = {}) {
       `2) Substitua os arquivos da pasta src/ pela nova versão\n` +
       `3) Mantenha: .env, config.json, data/, src/tools/user-tools/\n` +
       `4) Rode: npm install (se package.json mudou)\n` +
-      `5) Reinicie o Kerneo\n\n` +
+      `5) Reinicie o Samaritano\n\n` +
       `Changelog:\n${release.body?.slice(0, 500) || '(sem detalhes)'}`,
   }
 }

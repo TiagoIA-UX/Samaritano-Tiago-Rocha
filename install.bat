@@ -1,11 +1,11 @@
 @echo off
 REM ============================================================
-REM  Kerneo Lite - Wrapper minimal (ASCII puro, sem dependencias)
+REM  Samaritano - Wrapper minimal (ASCII puro, sem dependencias)
 REM  Funciona em qualquer Windows 7+ em qualquer code page.
 REM  Toda a logica esta no install.ps1.
 REM ============================================================
 
-title Kerneo Lite - Instalador
+title Samaritano - Instalador
 
 REM Move pra pasta do script (suporta paths com espacos e acentos)
 cd /d "%~dp0"

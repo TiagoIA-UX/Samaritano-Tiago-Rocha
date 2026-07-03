@@ -22,10 +22,10 @@ Não é mais um chatbot na nuvem. É uma IA que **evolui com você**.
 
 ```
 Você:    "cria uma skill que controla o volume do PC"
-Kerneo:  ✨ Skill "volume_control" criada. Pode usar agora.
+Samaritano:  ✨ Skill "volume_control" criada. Pode usar agora.
 
 Você:    "abaixa o volume"
-Kerneo:  ✓ Volume diminuído.
+Samaritano:  ✓ Volume diminuído.
 ```
 
 Cada skill criada é um **arquivo JavaScript real** em `src/tools/user-tools/`,

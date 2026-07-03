@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# start.sh — Atalho rapido pra rodar Kerneo Lite (Mac/Linux)
+# start.sh — Atalho rapido pra rodar Samaritano (Mac/Linux)
 
 if [ ! -d "node_modules" ]; then
     echo "  Dependencias nao instaladas. Rode install.sh primeiro."
@@ -10,7 +10,7 @@ if [ ! -f ".env" ]; then
     exit 1
 fi
 
-echo "  Iniciando Kerneo Lite..."
+echo "  Iniciando Samaritano..."
 echo "  Pra parar: Ctrl+C"
 echo
 

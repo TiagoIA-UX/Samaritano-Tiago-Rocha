@@ -1,4 +1,4 @@
-# Kerneo Lite - Diagnostico
+# Samaritano - Diagnostico
 # Coleta info do sistema pra ajudar a identificar problemas.
 
 $ErrorActionPreference = 'SilentlyContinue'
@@ -22,12 +22,12 @@ function Item($label, $value) {
 }
 
 # Reset report
-"Kerneo Lite - Diagnostico" | Out-File -FilePath $ReportFile -Encoding utf8
+"Samaritano - Diagnostico" | Out-File -FilePath $ReportFile -Encoding utf8
 "Gerado em: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" | Out-File -Append -FilePath $ReportFile -Encoding utf8
 
 Clear-Host
 Write-Host ""
-Write-Host "  Kerneo Lite - Diagnostico" -ForegroundColor Cyan
+Write-Host "  Samaritano - Diagnostico" -ForegroundColor Cyan
 Write-Host "  Coletando informacoes..." -ForegroundColor Gray
 Write-Host ""
 
@@ -62,7 +62,7 @@ if ($node) {
 }
 
 # ── Kerneo files ──
-Section "ARQUIVOS DO KERNEO"
+Section "ARQUIVOS DO SAMARITANO"
 $expected = @('package.json', '.env.example', 'src\server.js', 'public\index.html', 'install.bat', 'install.ps1')
 foreach ($f in $expected) {
     $exists = Test-Path $f

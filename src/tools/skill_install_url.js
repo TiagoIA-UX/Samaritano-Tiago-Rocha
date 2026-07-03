@@ -60,7 +60,7 @@ function fetchText(url, redirects = 0) {
     if (redirects > 5) return reject(new Error('Muitos redirects'))
     const lib = url.startsWith('https://') ? https : http
     lib.get(url, {
-      headers: { 'User-Agent': 'Kerneo-Lite-SkillInstaller', Accept: 'text/plain, application/javascript, */*' },
+      headers: { 'User-Agent': 'Samaritano-SkillInstaller', Accept: 'text/plain, application/javascript, */*' },
     }, (res) => {
       if (res.statusCode === 301 || res.statusCode === 302 || res.statusCode === 307) {
         return fetchText(res.headers.location, redirects + 1).then(resolve, reject)
@@ -127,7 +127,7 @@ export async function execute({ url, name } = {}) {
     return {
       ok: false,
       error: `Código rejeitado: ${validation.reason}`,
-      hint: 'Esse arquivo não parece ser uma skill Kerneo válida ou tem padrões perigosos.',
+      hint: 'Esse arquivo não parece ser uma skill Samaritano válida ou tem padrões perigosos.',
     }
   }
 
