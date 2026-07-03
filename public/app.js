@@ -1,5 +1,5 @@
 /**
- * app.js — Frontend Kerneo Lite (state machine robusta).
+ * app.js — Frontend Samaritano (state machine robusta).
  *
  * REGRA DE OURO de inicialização:
  *   1. TODAS as declarações de elementos DOM no TOPO
@@ -34,7 +34,7 @@ const State = {
 const PROVIDER_INFO = {
   groq: {
     label: 'Groq',
-    desc: 'Llama 3.3 70B — rápido, free tier generoso (sem cartão)',
+    desc: 'GPT-OSS 120B — rápido, free tier generoso (sem cartão)',
     keyUrl: 'https://console.groq.com/keys',
     keyHint: 'gsk_...',
     pros: '✓ Free tier · ✓ Ultra-rápido',
@@ -136,7 +136,7 @@ function $(id) {
 
 function showFatalError(msg) {
   // Erro CRÍTICO — mostra banner persistente e loga.
-  console.error('[Kerneo] FATAL:', msg)
+  console.error('[Samaritano] FATAL:', msg)
   const body = document.body
   if (!body) return
   let banner = document.getElementById('fatal-error')
@@ -192,7 +192,7 @@ async function checkHealth() {
       showBanner('Acesse via <a href="https://localhost:5071">https://localhost:5071</a> pra mic mais estável.', 'warning')
     }
   } catch (err) {
-    console.warn('[Kerneo] health check falhou:', err)
+    console.warn('[Samaritano] health check falhou:', err)
     statusDot.classList.remove('ok')
     statusDot.classList.add('error')
     statusText.textContent = 'offline'
@@ -208,7 +208,7 @@ function showEmptyState() {
   if (!chat || chat.children.length > 0) return
 
   // User fechou as sugestões antes? respeita
-  const dismissed = localStorage.getItem('kerneo:suggestions:dismissed') === '1'
+  const dismissed = localStorage.getItem('samaritano:suggestions:dismissed') === '1'
 
   if (dismissed) {
     chat.innerHTML = `
@@ -227,7 +227,7 @@ function showEmptyState() {
     `
     const showBtn = chat.querySelector('#show-tips')
     if (showBtn) showBtn.onclick = () => {
-      localStorage.removeItem('kerneo:suggestions:dismissed')
+      localStorage.removeItem('samaritano:suggestions:dismissed')
       chat.innerHTML = ''
       showEmptyState()
     }
@@ -261,7 +261,7 @@ function showEmptyState() {
   // X fecha e salva preferência
   const closeBtn = chat.querySelector('#close-suggestions')
   if (closeBtn) closeBtn.onclick = () => {
-    localStorage.setItem('kerneo:suggestions:dismissed', '1')
+    localStorage.setItem('samaritano:suggestions:dismissed', '1')
     chat.innerHTML = ''
     showEmptyState()
   }
@@ -331,7 +331,7 @@ function setMicState(newState, reason = '') {
 
 function setupRecognition() {
   // Whisper primário — Web Speech permanece desativado por consistência.
-  console.log('[Kerneo] STT: Whisper (servidor) é o caminho primário')
+  console.log('[Samaritano] STT: Whisper (servidor) é o caminho primário')
   webSpeechAvailable = false
   recognition = null
 }
@@ -349,7 +349,7 @@ async function startWhisperRecording() {
       })
     }
   } catch (err) {
-    console.warn('[Kerneo] getUserMedia fail:', err)
+    console.warn('[Samaritano] getUserMedia fail:', err)
     if (err.name === 'NotAllowedError') {
       showBanner('Permissão do mic negada. Clique no 🔒 da URL e permita.', 'error')
     } else if (err.name === 'NotFoundError') {
@@ -400,7 +400,7 @@ async function startWhisperRecording() {
         setMicState(State.ERROR, 'Whisper sem texto')
       }
     } catch (err) {
-      console.warn('[Kerneo] STT error:', err)
+      console.warn('[Samaritano] STT error:', err)
       setMicState(State.ERROR, 'Falha no Whisper')
     } finally {
       if (micState === State.PROCESSING) setMicState(State.IDLE)
@@ -427,12 +427,12 @@ function handleMicClick() {
   if (webSpeechAvailable && recognition) {
     try { recognition.start() }
     catch (err) {
-      console.warn('[Kerneo] mic start error:', err)
+      console.warn('[Samaritano] mic start error:', err)
       setMicState(State.ERROR, err.message)
     }
   } else {
     startWhisperRecording().catch(err => {
-      console.warn('[Kerneo] whisper start error:', err)
+      console.warn('[Samaritano] whisper start error:', err)
       setMicState(State.ERROR, err.message)
     })
   }
@@ -444,7 +444,7 @@ function handleMicClick() {
 
 async function submit() {
   if (!input || !chat) {
-    console.error('[Kerneo] submit() sem DOM elements')
+    console.error('[Samaritano] submit() sem DOM elements')
     return
   }
   const text = input.value.trim()
@@ -500,7 +500,7 @@ async function submit() {
     if (voiceMode) playTTS(j.text)
   } catch (err) {
     if (thinking && thinking.parentNode) thinking.remove()
-    console.error('[Kerneo] submit network error:', err)
+    console.error('[Samaritano] submit network error:', err)
     appendMsg('assistant',
       `❌ Falha de rede: ${err.message}\n💡 Servidor pode ter caído. Tenta recarregar a página (F5).`,
       { error: true }
@@ -526,7 +526,7 @@ async function submit() {
  */
 async function submitStream() {
   if (!input || !chat) {
-    console.error('[Kerneo] submitStream() sem DOM')
+    console.error('[Samaritano] submitStream() sem DOM')
     return
   }
   const text = input.value.trim()
@@ -624,7 +624,7 @@ async function submitStream() {
 
     if (!r.body || typeof r.body.getReader !== 'function') {
       // Browser sem ReadableStream — fallback pro endpoint não-streaming
-      console.warn('[Kerneo] sem ReadableStream, fallback /chat')
+      console.warn('[Samaritano] sem ReadableStream, fallback /chat')
       assistantEl.remove()
       if (wantTTS) endTTSStream()
       input.value = text
@@ -656,7 +656,7 @@ async function submitStream() {
 
         let evt
         try { evt = JSON.parse(payload) }
-        catch (e) { console.warn('[Kerneo] bad SSE payload:', payload.slice(0, 100)); continue }
+        catch (e) { console.warn('[Samaritano] bad SSE payload:', payload.slice(0, 100)); continue }
 
         if (evt.type === 'text') {
           pendingSentence += evt.content
@@ -700,7 +700,7 @@ async function submitStream() {
     cursor.remove()
     assistantEl.classList.remove('streaming')
   } catch (err) {
-    console.error('[Kerneo] submitStream error:', err)
+    console.error('[Samaritano] submitStream error:', err)
     if (wantTTS) endTTSStream()
     cursor.remove()
     assistantEl.classList.remove('streaming')
@@ -787,7 +787,7 @@ function stopTTS() {
     try { ttsPlayer.load() } catch {}
   }
   ttsCurrentlyPlaying = false
-  console.log('[Kerneo] TTS interrompido')
+  console.log('[Samaritano] TTS interrompido')
 }
 
 /**
@@ -934,7 +934,7 @@ async function playBlob(blob) {
     ttsPlayer.onerror = cleanup
     ttsPlayer.src = url
     ttsPlayer.play().catch(err => {
-      console.warn('[Kerneo] play() blocked:', err)
+      console.warn('[Samaritano] play() blocked:', err)
       cleanup()
     })
   })
@@ -953,11 +953,11 @@ async function playTTS(text) {
     return
   }
 
-  console.log(`[Kerneo] TTS: ${sentences.length} sentenças, streaming em paralelo`)
+  console.log(`[Samaritano] TTS: ${sentences.length} sentenças, streaming em paralelo`)
 
   // Dispara TODAS as gerações em paralelo (não espera 1ª terminar)
   const blobPromises = sentences.map(s => generateTTSBlob(s).catch(err => {
-    console.warn('[Kerneo] TTS sentence err:', err.message)
+    console.warn('[Samaritano] TTS sentence err:', err.message)
     return null
   }))
 
@@ -969,7 +969,7 @@ async function playTTS(text) {
       if (!blob || ttsAbortRequested) break
       await playBlob(blob)
     } catch (err) {
-      console.warn('[Kerneo] TTS play err:', err)
+      console.warn('[Samaritano] TTS play err:', err)
     }
   }
 
@@ -996,9 +996,9 @@ function startTTSStream() {
 function enqueueTTSSentence(text) {
   const t = (text || '').trim()
   if (!t || ttsAbortRequested) return
-  console.log(`[Kerneo] TTS enqueue: "${t.slice(0, 50)}${t.length > 50 ? '…' : ''}"`)
+  console.log(`[Samaritano] TTS enqueue: "${t.slice(0, 50)}${t.length > 50 ? '…' : ''}"`)
   const blobPromise = generateTTSBlob(t).catch(err => {
-    console.warn('[Kerneo] TTS sentence err:', err.message)
+    console.warn('[Samaritano] TTS sentence err:', err.message)
     return null
   })
   ttsStreamQueue.push(blobPromise)
@@ -1021,7 +1021,7 @@ async function drainTTSQueue() {
         if (!blob || ttsAbortRequested) continue
         await playBlob(blob)
       } catch (err) {
-        console.warn('[Kerneo] TTS drain play err:', err)
+        console.warn('[Samaritano] TTS drain play err:', err)
       }
     }
   } finally {
@@ -1057,7 +1057,7 @@ function endTTSStream() {
 
 async function startRealtimeMode() {
   if (realtimeActive) return
-  console.log('[Kerneo] Realtime ON — pedindo permissão do mic...')
+  console.log('[Samaritano] Realtime ON — pedindo permissão do mic...')
 
   try {
     realtimeStream = await navigator.mediaDevices.getUserMedia({
@@ -1069,7 +1069,7 @@ async function startRealtimeMode() {
       },
     })
   } catch (err) {
-    console.warn('[Kerneo] realtime mic permission:', err)
+    console.warn('[Samaritano] realtime mic permission:', err)
     if (err.name === 'NotAllowedError') {
       showBanner('Permissão do mic negada. Clique no 🔒 da URL e permita.', 'error')
     } else {
@@ -1095,12 +1095,12 @@ async function startRealtimeMode() {
   realtimeSpeechStart = null
   realtimeRMSCheckInterval = setInterval(checkVAD, VAD_CHECK_INTERVAL_MS)
 
-  console.log('[Kerneo] Realtime ON, VAD ativo')
+  console.log('[Samaritano] Realtime ON, VAD ativo')
 }
 
 function stopRealtimeMode() {
   if (!realtimeActive) return
-  console.log('[Kerneo] Realtime OFF')
+  console.log('[Samaritano] Realtime OFF')
 
   realtimeActive = false
   realtimeBtn.classList.remove('active')
@@ -1160,7 +1160,7 @@ function checkVAD() {
 
     // Se TTS está tocando E user falando → INTERROMPE TTS
     if (isTTSPlaying()) {
-      console.log('[Kerneo] User interrompeu TTS, voltando a escutar')
+      console.log('[Samaritano] User interrompeu TTS, voltando a escutar')
       stopTTS()
     }
 
@@ -1177,7 +1177,7 @@ function checkVAD() {
 
       // Silêncio prolongado E fala foi mínima → encerra utterance
       if (silenceMs >= VAD_SILENCE_DURATION_MS && speechMs >= VAD_MIN_SPEECH_MS) {
-        console.log(`[Kerneo] Fim de fala detectado (${speechMs}ms speech, ${silenceMs}ms silence)`)
+        console.log(`[Samaritano] Fim de fala detectado (${speechMs}ms speech, ${silenceMs}ms silence)`)
         stopRealtimeRecording()
       }
     }
@@ -1194,7 +1194,7 @@ function startRealtimeRecording() {
   try {
     realtimeRecorder = new MediaRecorder(realtimeStream, mime ? { mimeType: mime } : undefined)
   } catch (err) {
-    console.warn('[Kerneo] realtime MediaRecorder:', err)
+    console.warn('[Samaritano] realtime MediaRecorder:', err)
     return
   }
   realtimeRecorder.ondataavailable = (e) => {
@@ -1227,10 +1227,10 @@ function startRealtimeRecording() {
         voiceMode = true
         await submitStream()
       } else {
-        console.log('[Kerneo] realtime STT vazio')
+        console.log('[Samaritano] realtime STT vazio')
       }
     } catch (err) {
-      console.warn('[Kerneo] realtime STT:', err)
+      console.warn('[Samaritano] realtime STT:', err)
     } finally {
       setMicState(State.IDLE)
       // Volta a escutar (loop)
@@ -1242,7 +1242,7 @@ function startRealtimeRecording() {
   realtimeRecorder.start()
   realtimeRecording = true
   setVoiceStatus('listening', '🎙️ Captando...')
-  console.log('[Kerneo] realtime gravando...')
+  console.log('[Samaritano] realtime gravando...')
 }
 
 function stopRealtimeRecording() {
@@ -1526,7 +1526,7 @@ async function savePrimaryProvider() {
 // ════════════════════════════════════════════════════════════
 
 function init() {
-  console.log('[Kerneo] init starting...')
+  console.log('[Samaritano] init starting...')
 
   // Pega DOM elements (DOM já pronto neste ponto)
   chat = $('chat')
@@ -1558,7 +1558,7 @@ function init() {
   sendBtn.onclick = () => {
     voiceMode = false
     submitStream().catch(err => {
-      console.error('[Kerneo] submitStream catch:', err)
+      console.error('[Samaritano] submitStream catch:', err)
       appendMsg('assistant', `❌ ${err.message}`, { error: true })
     })
   }
@@ -1568,7 +1568,7 @@ function init() {
       e.preventDefault()
       voiceMode = false
       submitStream().catch(err => {
-        console.error('[Kerneo] submitStream catch:', err)
+        console.error('[Samaritano] submitStream catch:', err)
         appendMsg('assistant', `❌ ${err.message}`, { error: true })
       })
     }
@@ -1578,14 +1578,14 @@ function init() {
   micBtn.onclick = handleMicClick
 
   // Setup steps — cada um isolado em try/catch
-  try { checkHealth() } catch (err) { console.warn('[Kerneo] checkHealth fail:', err) }
-  try { showEmptyState() } catch (err) { console.warn('[Kerneo] showEmptyState fail:', err) }
-  try { setupRecognition() } catch (err) { console.warn('[Kerneo] setupRecognition fail:', err) }
-  try { setupKeyboard() } catch (err) { console.warn('[Kerneo] setupKeyboard fail:', err) }
-  try { setupSettings() } catch (err) { console.warn('[Kerneo] setupSettings fail:', err) }
-  try { setupRealtime() } catch (err) { console.warn('[Kerneo] setupRealtime fail:', err) }
+  try { checkHealth() } catch (err) { console.warn('[Samaritano] checkHealth fail:', err) }
+  try { showEmptyState() } catch (err) { console.warn('[Samaritano] showEmptyState fail:', err) }
+  try { setupRecognition() } catch (err) { console.warn('[Samaritano] setupRecognition fail:', err) }
+  try { setupKeyboard() } catch (err) { console.warn('[Samaritano] setupKeyboard fail:', err) }
+  try { setupSettings() } catch (err) { console.warn('[Samaritano] setupSettings fail:', err) }
+  try { setupRealtime() } catch (err) { console.warn('[Samaritano] setupRealtime fail:', err) }
 
-  console.log('[Kerneo] init done. SESSION_ID =', SESSION_ID)
+  console.log('[Samaritano] init done. SESSION_ID =', SESSION_ID)
 }
 
 // Se DOM já pronto, init agora. Senão, espera.

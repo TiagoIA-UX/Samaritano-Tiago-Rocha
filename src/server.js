@@ -15,7 +15,7 @@
  *   HTTPS em PORT+1 (default 5071) — pra mic seguro (cert self-signed auto-gerado)
  */
 
-import 'dotenv/config'
+import './utils/env.js'
 import http from 'http'
 import https from 'https'
 import fs from 'fs'
@@ -452,7 +452,7 @@ setTimeout(() => {
   const httpUrl = `http://${localhost}:${PORT_HTTP}`
   const httpsUrl = httpsUp ? `https://${localhost}:${PORT_HTTPS}` : null
   log.info('═══════════════════════════════════════════════')
-  log.info(`✅ Kerneo Lite online`)
+  log.info(`✅ Samaritano online (Tiago Rocha)`)
   log.info(`   HTTP:  ${httpUrl}`)
   if (httpsUrl) log.info(`   HTTPS: ${httpsUrl}  (recomendado pra microfone)`)
   log.info(`   Health: ${httpUrl}/health`)

@@ -1,18 +1,20 @@
-# ⚡ Kerneo Lite
+# 🤝 Samaritano — Tiago Rocha
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Node](https://img.shields.io/badge/Node.js-20%2B-brightgreen)](https://nodejs.org)
-[![Status](https://img.shields.io/badge/status-v0.4_beta-blue)]()
+[![Status](https://img.shields.io/badge/status-v0.3_beta-blue)]()
 [![PT-BR](https://img.shields.io/badge/lang-pt--BR-yellow)]()
 
 > **O assistente que aprende a fazer o que você pede.**
+> Por **Tiago Aureliano da Rocha** · CNPJ 61.699.939/0001-80
 > Sem código. Sem terminal. Em português.
 
 ---
 
-## 🧠 O que é o Kerneo?
+## 🧠 O que é o Samaritano?
 
-Kerneo é um **orquestrador de IA** que mora no **seu computador**.
+Samaritano é um **orquestrador de IA** que mora no **seu computador**.
+Fork personalizado do [Kerneo](https://github.com/TiagoIA-UX/Kerneo) (MIT).
 Fala português, age no seu sistema, lembra de você entre sessões —
 e quando não sabe fazer algo, **cria a skill em segundos**.
 

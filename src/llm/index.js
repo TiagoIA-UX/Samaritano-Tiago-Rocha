@@ -496,7 +496,7 @@ export async function stt(audioBuffer, opts = {}) {
     language: opts.language || 'pt',
     // Prompt ancora vocabulário e variante (PT-BR vs PT-PT). Whisper usa só
     // os últimos 224 tokens, então mantém curto. Ortografia BR força BR.
-    prompt: opts.prompt || 'Transcrição em português brasileiro. Kerneo, abre, pesquisa, calculadora, YouTube, navegador, screenshot.',
+    prompt: opts.prompt || 'Transcrição em português brasileiro. Samaritano, abre, pesquisa, calculadora, YouTube, navegador, screenshot.',
     // temperature: 0 elimina hallucinations em áudios curtos/silêncio
     temperature: opts.temperature ?? 0,
   }

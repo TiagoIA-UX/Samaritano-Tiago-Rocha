@@ -13,7 +13,7 @@ export function setRegistry(reg) { _registry = reg }
 
 export const definition = {
   name: 'kerneo_help',
-  description: 'Mostra ajuda organizada com exemplos práticos do que o Kerneo sabe fazer. Use quando user pedir "ajuda", "help", "o que sabe fazer", "tutorial", "exemplos", "me ensina a usar".',
+  description: 'Mostra ajuda organizada com exemplos práticos do que o Samaritano sabe fazer. Use quando user pedir "ajuda", "help", "o que sabe fazer", "tutorial", "exemplos", "me ensina a usar".',
   parameters: {
     type: 'object',
     properties: {
@@ -77,16 +77,16 @@ const HELP_CATEGORIES = {
   },
   voz: {
     title: '🎙️  Voz',
-    desc: 'Fala com o Kerneo (Web Speech ou Whisper)',
+    desc: 'Fala com o Samaritano (Web Speech ou Whisper)',
     examples: [
       'Segura a barra de espaço pra falar',
-      'Solta pra enviar — Kerneo responde com voz',
+      'Solta pra enviar — Samaritano responde com voz',
       'Funciona melhor no Chrome/Edge',
     ],
   },
   'auto-evolucao': {
     title: '✨ Auto-evolução (DIFERENCIAL!)',
-    desc: 'Kerneo cria suas próprias skills sob demanda',
+    desc: 'Samaritano cria suas próprias skills sob demanda',
     examples: [
       'cria uma skill que tira screenshot',
       'cria uma skill que controla o volume',

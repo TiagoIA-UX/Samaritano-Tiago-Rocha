@@ -22,7 +22,7 @@ let _registry = null
 export function setLLMRouter(router) { _llmRouter = router }
 export function setRegistry(registry) { _registry = registry }
 
-const ITERATE_PROMPT = `Você está MELHORANDO uma skill existente do Kerneo Lite que tinha um problema.
+const ITERATE_PROMPT = `Você está MELHORANDO uma skill existente do Samaritano que tinha um problema.
 
 ═══ CÓDIGO ATUAL DA SKILL ═══
 \`\`\`javascript
@@ -103,7 +103,7 @@ export async function execute({ name, feedback = 'corrija o problema, deixa mais
   if (!isUserCreated) {
     return {
       ok: false,
-      error: `"${name}" é uma skill nativa. Não posso reescrever — é parte do core do Kerneo.`,
+      error: `"${name}" é uma skill nativa. Não posso reescrever — é parte do core do Samaritano.`,
     }
   }
 

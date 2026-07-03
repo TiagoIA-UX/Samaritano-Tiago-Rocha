@@ -1,4 +1,4 @@
-/* Kerneo Lite — minimal, dark, focus-on-content */
+/* Samaritano — minimal, dark, focus-on-content */
 
 :root {
   --bg: #0a0a0a;
@@ -52,17 +52,20 @@ html, body {
 .brand {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-weight: 600;
 }
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  line-height: 1.2;
+}
 .logo { font-size: 22px; }
-.name { color: var(--text); }
-.tag {
+.name { color: var(--text); font-size: 16px; }
+.author {
   font-size: 11px;
   color: var(--text-dim);
-  background: var(--bg-elev);
-  padding: 2px 6px;
-  border-radius: 4px;
   font-weight: 400;
 }
 .status {

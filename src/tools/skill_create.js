@@ -33,7 +33,7 @@ let _registry = null
 export function setLLMRouter(router) { _llmRouter = router }
 export function setRegistry(registry) { _registry = registry }
 
-const TOOL_TEMPLATE_PROMPT = `Você está criando código JavaScript pra uma nova "tool" do Kerneo Lite.
+const TOOL_TEMPLATE_PROMPT = `Você está criando código JavaScript pra uma nova "tool" do Samaritano.
 
 ═══ ESTRUTURA OBRIGATÓRIA ═══
 
@@ -87,7 +87,7 @@ export async function execute(args = {}) {
 3. Mensagens em PT-BR natural (não robotizado)
 4. Cross-platform: detectar process.platform quando necessário
 5. NÃO usar dependências externas (npm) — só Node nativo
-6. NÃO modificar arquivos do próprio Kerneo (auto-modificação proibida)
+6. NÃO modificar arquivos do próprio Samaritano (auto-modificação proibida)
 7. Operações destrutivas (delete) devem pedir confirmação via arg \`confirm: true\`
 8. Outputs longos: truncar pra 4000 chars max
 9. Se a tool precisa de arg que o user não passou, retornar { ok: false, error: 'arg X obrigatório' }
@@ -95,7 +95,7 @@ export async function execute(args = {}) {
     de fato, retorne { ok: false, error: 'descrição real do limite' }.
     NUNCA retorne strings tipo "Texto analisado da imagem", "Resultado:",
     "Ação executada com sucesso" sem ter REALMENTE feito a ação.
-11. Se sua skill PRECISA de Vision/análise de imagem, AVISE: o Kerneo Lite
+11. Se sua skill PRECISA de Vision/análise de imagem, AVISE: o Samaritano
     JÁ TEM tool nativa screen_capture. Em vez de criar duplicata, sugira
     no error: "Use a tool nativa screen_capture pra essa funcionalidade."
 12. Se sua skill PRECISA de pesquisa web, JÁ TEM web_search nativa. Reuse.

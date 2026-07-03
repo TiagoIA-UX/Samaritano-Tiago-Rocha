@@ -35,6 +35,13 @@ if (Test-Path ".gitignore") {
     } else {
         Write-Host "  OK .env protegido" -ForegroundColor Green
     }
+    if ($gitignore -notmatch '\.env\.local') {
+        Write-Host "  X .env.local NAO esta no .gitignore" -ForegroundColor Red
+        $exitCode = 1
+        $gitignoreOk = $false
+    } else {
+        Write-Host "  OK .env.local protegido" -ForegroundColor Green
+    }
     if ($gitignore -notmatch 'config\.json') {
         Write-Host "  X config.json NAO esta no .gitignore" -ForegroundColor Red
         $exitCode = 1

@@ -1,7 +1,7 @@
 @echo off
-REM Kerneo Lite - Atalho rapido (apos instalacao via install.bat)
+REM Samaritano - Atalho rapido (apos instalacao via install.bat)
 
-title Kerneo Lite
+title Samaritano - Tiago Rocha
 
 cd /d "%~dp0"
 

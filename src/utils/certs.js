@@ -77,7 +77,7 @@ function generateSelfSigned(certsDir) {
   const attrs = [
     { name: 'commonName', value: 'localhost' },
     { name: 'countryName', value: 'BR' },
-    { name: 'organizationName', value: 'Kerneo Lite' },
+    { name: 'organizationName', value: 'Samaritano - Tiago Rocha' },
   ]
   const opts = {
     algorithm: 'sha256',

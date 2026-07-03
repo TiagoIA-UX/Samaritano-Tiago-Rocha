@@ -1,0 +1,34 @@
+# Dependências
+node_modules/
+
+# Segredos e config local (nunca commitar)
+.env
+.env.local
+.env.*.local
+config.json
+
+# Dados locais
+data/
+dist/
+*.db
+
+# Certificados HTTPS gerados localmente
+certs/
+*.pem
+*.key
+*.crt
+
+# Logs e diagnóstico
+*.log
+diagnostico.txt
+
+# SO / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build pkg
+*.exe

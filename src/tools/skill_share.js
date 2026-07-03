@@ -16,7 +16,7 @@ export function setRegistry(reg) { _registry = reg }
 
 export const definition = {
   name: 'skill_share',
-  description: 'Exporta uma skill criada pelo user pra compartilhar com outras pessoas. Retorna o código JS pronto pra colar em outro Kerneo. Use quando user pedir "compartilha skill X", "exporta skill Y", "como mando essa skill pra alguém".',
+  description: 'Exporta uma skill criada pelo user pra compartilhar com outras pessoas. Retorna o código JS pronto pra colar em outro Samaritano. Use quando user pedir "compartilha skill X", "exporta skill Y", "como mando essa skill pra alguém".',
   parameters: {
     type: 'object',
     properties: {
@@ -44,7 +44,7 @@ export async function execute({ name, mode = 'text' } = {}) {
   if (!isUserCreated) {
     return {
       ok: false,
-      error: `"${name}" é uma skill nativa do Kerneo, não criada por você. Não há nada pra exportar.`,
+      error: `"${name}" é uma skill nativa do Samaritano, não criada por você. Não há nada pra exportar.`,
     }
   }
 
@@ -96,12 +96,12 @@ export async function execute({ name, mode = 'text' } = {}) {
     code,
     instructions:
       'Pra outra pessoa instalar: ela cola o código abaixo num arquivo `' + name + '.js` ' +
-      'dentro de `src/tools/user-tools/` do Kerneo dela e reinicia. Ou usa skill_install_url se for um link.',
+      'dentro de `src/tools/user-tools/` do Samaritano dela e reinicia. Ou usa skill_install_url se for um link.',
     message:
       `=== Skill: ${name} ===\n` +
       `${entry.definition.description}\n\n` +
       `--- COPIE O CÓDIGO ABAIXO ---\n\n${code}\n\n` +
       `--- FIM ---\n\n` +
-      `Instalar: cole em src/tools/user-tools/${name}.js do outro Kerneo.`,
+      `Instalar: cole em src/tools/user-tools/${name}.js do outro Samaritano.`,
   }
 }

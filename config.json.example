@@ -1,5 +1,5 @@
 {
-  "// docs": "Kerneo Lite — config completa. Copie pra config.json e edite. Se config.json não existir, fallback usa apenas .env (OPENAI_API_KEY).",
+  "// docs": "Samaritano — config completa. Copie pra config.json e edite. Segredos (API keys): use .env.local (veja .env.example).",
   "// suporte": "Suporta OpenAI, Anthropic, DeepSeek, Groq, Gemini, OpenRouter, Ollama (local), e qualquer provider compatível com OpenAI API. Basta preencher apiKey + opcionalmente baseUrl.",
 
   "provider": "auto",
@@ -44,10 +44,10 @@
       "apiKey": "",
       "baseUrl": "https://api.groq.com/openai/v1",
       "models": {
-        "fast": "llama-3.3-70b-versatile",
-        "smart": "llama-3.3-70b-versatile"
+        "fast": "openai/gpt-oss-120b",
+        "smart": "openai/gpt-oss-120b"
       },
-      "// docs": "Groq — inferência ULTRA RÁPIDA (~500 tokens/s). Llama 3.3 grátis. https://console.groq.com/"
+      "// docs": "Groq — GPT-OSS 120B (substituto do Llama 3.3 70B, descontinuado em 16/08/2026). https://console.groq.com/docs/deprecations"
     },
 
     "gemini": {
@@ -114,6 +114,6 @@
   "skills": {
     "allowAutoCreate": true,
     "maxUserSkills": 50,
-    "// docs": "allowAutoCreate=false desativa o tool skill_create (impede Kerneo de gerar novas tools). maxUserSkills limita quantas user-tools podem existir."
+    "// docs": "allowAutoCreate=false desativa o tool skill_create (impede Samaritano de gerar novas tools). maxUserSkills limita quantas user-tools podem existir."
   }
 }

@@ -17,7 +17,7 @@ const log = makeLogger('memory')
 export class MemoryStore {
   constructor(dataDir) {
     if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
-    const dbPath = path.join(dataDir, 'kerneo.db')
+    const dbPath = path.join(dataDir, 'samaritano.db')
     this.db = new Database(dbPath)
     this.db.pragma('journal_mode = WAL')
     this._init()

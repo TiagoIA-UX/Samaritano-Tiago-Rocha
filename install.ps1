@@ -367,7 +367,7 @@ if (-not $envValid) {
     Write-Host ""
     Write-Host "  Opcao 1: GROQ (recomendado pra comecar)" -ForegroundColor Green
     Write-Host "    + Free tier generoso (sem cartao de credito)" -ForegroundColor Gray
-    Write-Host "    + Llama 3.3 70B - rapido e bom em PT-BR" -ForegroundColor Gray
+    Write-Host "    + GPT-OSS 120B - rapido e bom em PT-BR" -ForegroundColor Gray
     Write-Host "    - Sem voz/TTS (precisa OpenAI tambem se quiser falar)" -ForegroundColor Gray
     Write-Host ""
     Write-Host "  Opcao 2: OPENAI (full features)" -ForegroundColor Cyan

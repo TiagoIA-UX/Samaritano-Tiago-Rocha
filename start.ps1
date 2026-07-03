@@ -1,4 +1,4 @@
-# Kerneo Lite - Start rapido (assume install.ps1 ja rodou)
+# Samaritano - Start rapido (assume install.ps1 ja rodou)
 
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8

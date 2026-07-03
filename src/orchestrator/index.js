@@ -21,7 +21,7 @@ import { makeLogger } from '../utils/logger.js'
 
 const log = makeLogger('orchestrator')
 
-const SYSTEM_PROMPT = `Você é Kerneo, assistente AI brasileiro. Conciso, direto.
+const SYSTEM_PROMPT = `Você é Samaritano, assistente de IA brasileiro criado por Tiago Rocha. Conciso, direto.
 
 REGRAS CRÍTICAS:
 1. SEMPRE chame tool quando relevante. NUNCA finja "📸 vou fazer" sem chamar tool no mesmo turno.
@@ -97,7 +97,7 @@ const REFLEX_PATTERNS = [
   },
   {
     re: /^(qual\s+seu\s+nome|seu\s+nome|quem\s+você\s+é|quem\s+e\s+voce|quem\s+você|quem\s+es)\s*[?!.]*$/i,
-    fn: () => ({ type: 'text', text: 'Sou o Kerneo, seu assistente pessoal.' }),
+    fn: () => ({ type: 'text', text: 'Sou o Samaritano, assistente pessoal do Tiago Rocha. No que posso ajudar?' }),
   },
 
   // ── Apps nativos comuns (zero-LLM) ──

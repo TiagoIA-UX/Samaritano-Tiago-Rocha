@@ -41,7 +41,7 @@ const DEFAULT_CONFIG = {
     groq: {
       apiKey: '',
       baseUrl: 'https://api.groq.com/openai/v1',
-      models: { fast: 'llama-3.3-70b-versatile', smart: 'llama-3.3-70b-versatile' },
+      models: { fast: 'openai/gpt-oss-120b', smart: 'openai/gpt-oss-120b' },
     },
     gemini: {
       apiKey: '',
@@ -148,15 +148,17 @@ export function loadConfig(force = false) {
   // Server overrides
   if (process.env.PORT) config.server.port = Number(process.env.PORT)
   if (process.env.PORT_HTTPS) config.server.httpsPort = Number(process.env.PORT_HTTPS)
-  if (process.env.KERNEO_DISABLE_HTTPS === '1') config.server.httpsEnabled = false
-  if (process.env.KERNEO_BIND_LAN === '1') config.server.bindLan = true
+  if (process.env.KERNEO_DISABLE_HTTPS === '1' || process.env.SAMARITANO_DISABLE_HTTPS === '1') config.server.httpsEnabled = false
+  if (process.env.KERNEO_BIND_LAN === '1' || process.env.SAMARITANO_BIND_LAN === '1') config.server.bindLan = true
   if (process.env.LOG_LEVEL) config.logging.level = process.env.LOG_LEVEL
 
   // Voice
   if (process.env.OPENAI_VOICE) config.voice.voice = process.env.OPENAI_VOICE
 
   // Provider explicit override
-  if (process.env.KERNEO_PROVIDER) config.provider = process.env.KERNEO_PROVIDER
+  if (process.env.KERNEO_PROVIDER || process.env.SAMARITANO_PROVIDER) {
+    config.provider = process.env.SAMARITANO_PROVIDER || process.env.KERNEO_PROVIDER
+  }
 
   _cached = config
   return config
