@@ -26,7 +26,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const PROJECT_ROOT = path.resolve(__dirname, '..', '..')
 
-const REPO = process.env.SAMARITANO_UPDATE_REPO || process.env.KERNEO_UPDATE_REPO || 'TiagoIA-UX/Kerneo'
+const REPO = process.env.SAMARITANO_UPDATE_REPO || process.env.KERNEO_UPDATE_REPO || 'TiagoIA-UX/Samaritano-Tiago-Rocha'
 
 export const definition = {
   name: 'kerneo_self_update',
@@ -101,7 +101,7 @@ export async function execute({ check_only = false, force = false } = {}) {
         error: `Repo "${REPO}" não tem releases publicadas (ou não existe).`,
         hint:
           `Configure o repo via SAMARITANO_UPDATE_REPO ou KERNEO_UPDATE_REPO.\n` +
-          `Ex: SAMARITANO_UPDATE_REPO=TiagoIA-UX/Kerneo\n\n` +
+          `Ex: SAMARITANO_UPDATE_REPO=TiagoIA-UX/Samaritano-Tiago-Rocha\n\n` +
           `Você está na versão ${current}. Auto-update ficará disponível quando o repo for publicado.`,
         current,
       }

@@ -14,7 +14,7 @@
 ## 🧠 O que é o Samaritano?
 
 Samaritano é um **orquestrador de IA** que mora no **seu computador**.
-Fork personalizado do [Kerneo](https://github.com/TiagoIA-UX/Kerneo) (MIT).
+Fork personalizado do [Kerneo](https://github.com/TiagoIA-UX/Samaritano-Tiago-Rocha) (MIT).
 Fala português, age no seu sistema, lembra de você entre sessões —
 e quando não sabe fazer algo, **cria a skill em segundos**.
 
